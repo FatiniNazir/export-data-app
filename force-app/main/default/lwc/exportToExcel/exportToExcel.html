@@ -1,0 +1,42 @@
+<template>
+    <lightning-card title="Export Data to Excel">
+        <div class="slds-m-around_medium">
+            <!-- Export Button -->
+            <lightning-button 
+                label="Export Employees & Accounts" 
+                onclick={handleExport}>
+            </lightning-button>
+        </div>
+
+        <!-- Accordion for Employees and Accounts -->
+        <lightning-accordion allow-multiple-sections-open>
+            <!-- Employees Section -->
+            <lightning-accordion-section name="employees" label="Employees">
+                <template if:true={empList}>
+                    <lightning-datatable
+                        key-field="Id"
+                        data={empList}
+                        columns={empColumns}>
+                    </lightning-datatable>
+                </template>
+                <template if:false={empList}>
+                    <p class="slds-p-around_small">No employee data found.</p>
+                </template>
+            </lightning-accordion-section>
+
+            <!-- Accounts Section -->
+            <lightning-accordion-section name="accounts" label="Accounts">
+                <template if:true={accList}>
+                    <lightning-datatable
+                        key-field="Id"
+                        data={accList}
+                        columns={accColumns}>
+                    </lightning-datatable>
+                </template>
+                <template if:false={accList}>
+                    <p class="slds-p-around_small">No account data found.</p>
+                </template>
+            </lightning-accordion-section>
+        </lightning-accordion>
+    </lightning-card>
+</template>
