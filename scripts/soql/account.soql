@@ -6,3 +6,7 @@
 SELECT Id, Name, Industry, Phone
     FROM Account
     LIMIT 100
+
+SELECT Id, Name, Email__c, Role__c
+    FROM Employee__c
+    LIMIT 100
