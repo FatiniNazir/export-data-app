@@ -1,0 +1,4 @@
+
+SELECT Id, Name, Email__c, Role__c
+    FROM Employee__c
+    LIMIT 100
