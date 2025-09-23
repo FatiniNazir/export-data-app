@@ -11,7 +11,6 @@ export default class ExportToExcel extends LightningElement {
 
     // Column definitions for Employee datatable
     empColumns = [
-        { label: 'Id', fieldName: 'Id' },
         { label: 'Name', fieldName: 'Name' },
         { label: 'Email', fieldName: 'Email__c' },
         { label: 'Role', fieldName: 'Role__c' }
@@ -19,7 +18,6 @@ export default class ExportToExcel extends LightningElement {
 
     // Column definitions for Account datatable
     accColumns = [
-        { label: 'Id', fieldName: 'Id' },
         { label: 'Name', fieldName: 'Name' },
         { label: 'Industry', fieldName: 'Industry' },
         { label: 'Phone', fieldName: 'Phone' }
@@ -66,13 +64,25 @@ export default class ExportToExcel extends LightningElement {
 
         let wb = XLSX.utils.book_new();
 
+        //Transform Employee Data with friendly headers
         if (this.empList.length > 0) {
-            let empSheet = XLSX.utils.json_to_sheet(this.empList);
+            let empData = this.empList.map(emp => ({
+                Name: emp.Name,
+                Email: emp.Email__c,
+                Role: emp.Role__c
+            }));
+            let empSheet = XLSX.utils.json_to_sheet(empData);
             XLSX.utils.book_append_sheet(wb, empSheet, 'Employees');
         }
 
+        //Transform Account Data with friendly headers
         if (this.accList.length > 0) {
-            let accSheet = XLSX.utils.json_to_sheet(this.accList);
+            let accData = this.accList.map(acc => ({
+                Name: acc.Name,
+                Industry: acc.Industry,
+                Phone: acc.Phone
+            }));
+            let accSheet = XLSX.utils.json_to_sheet(accData);
             XLSX.utils.book_append_sheet(wb, accSheet, 'Accounts');
         }
 
